@@ -1,0 +1,23 @@
+---
+- hosts: ec2
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Instale o Docker
+      package:
+        name: docker
+        state: present
+
+    - name: Inicie o serviço Docker
+      service:
+        name: docker
+        state: started
+
+    - name: Instale o Rancher Kubernetes Engine (RKE)
+      command: curl -sfL https://get.rancher.io | sh -
+
+    - name: Crie um cluster RKE
+      command: rke up --config cluster.yml
+
+    - name: Instale o Rancher Server
+      command: docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
