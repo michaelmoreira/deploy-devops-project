@@ -3,10 +3,10 @@ terraform {
   required_version = ">= 1.0.0"
 
   required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "2.94.0"
-    }
+    #azurerm = #{
+    #source  = "hashicorp/azurerm"
+    #version = "2.94.0"
+    #}
 
     aws = {
       source  = "hashicorp/aws"
@@ -14,17 +14,17 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    resource_group_name  = "remote-state"
-    storage_account_name = "michaelmoreiraremotestate"
-    container_name       = "remote-state"
-    key                  = "pipeline-github-actions/terraform.tfstate"
-  }
+  #backend "azurerm" {
+  #resource_group_name  = "remote-state"
+  #storage_account_name = "michaelmoreiraremotestate"
+  #container_name       = "remote-state"
+  #key                  = "pipeline-github-actions/terraform.tfstate"
+  #}
 }
 
-provider "azurerm" {
-  features {}
-}
+#provider "azurerm" {
+#features {}
+#}
 
 data "terraform_remote_state" "vnet" {
   backend = "azurerm"
